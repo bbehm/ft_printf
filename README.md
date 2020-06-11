@@ -23,4 +23,24 @@ Conversion | Flags | Description
 %f | l, L | Floating point
 %% | - | Prints percent %
 
+The length specifiersf explained:
 
+Length specifier | di | oxX | f
+--------- | ------------ | --------- | ----------
+hh | signed char | unsigned char | -
+h | short int | unsigned short int | -
+l | long int | unsigned long int |
+ll | long long int | unsigned long long int |
+L | - | - | long double
+
+The following flags are also handled:
+
+Flag | Description
+-------- | -----------
+'#' | Adds prefixes or shows decimal point 
+0 | Pad with leading zeros
+- | Left justify
++ | Always display sign
+space | Display space if no sign
+
+As well as __precision__ and __minimum field-width__.
