@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 15:52:15 by bbehm             #+#    #+#             */
-/*   Updated: 2020/02/24 12:54:10 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/11 11:55:02 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,8 @@ int					ft_isspace(int c);
 int					ft_intlen(int n);
 char				*ft_itoa_base_mod(uintmax_t num, uintmax_t base, char c);
 void				ft_putnbrmax_fd(intmax_t n, int fd);
+void    			ft_put_zeros(int max, int *len);
+char                *ft_ftoa(long double f, int precision, int dot);
+void    			ft_put_spaces(int min, int size);
 
 #endif

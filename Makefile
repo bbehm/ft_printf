@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+         #
+#    By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/15 14:59:32 by bbehm             #+#    #+#              #
-#    Updated: 2020/02/24 16:57:14 by bbehm            ###   ########.fr        #
+#    Updated: 2020/06/10 08:52:23 by bbehm            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ CFILE =		ft_printf.c \
 			leftover.c \
 			parse.c \
 			show_char.c \
+			do_the_f.c
 			
 
 CFIND =		$(CFILE:%=$(SRC_DIR)%)
