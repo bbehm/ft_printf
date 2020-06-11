@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 10:19:36 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/11 11:44:11 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/11 12:08:41 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char                *ft_ftoa(long double f, int precision, int dot)
     res = ft_strjoin(before_dec, after_dec);
     free(after_dec);
     free(before_dec);
+    return (res);
 }
 
 
