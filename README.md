@@ -23,9 +23,9 @@ Conversion | Flags | Description
 %f | l, L | Floating point
 %% | - | Prints percent %
 
-The length specifiersf explained:
+The length specifiers explained:
 
-Length specifier | di | oxX | f
+Length Specifier | %d, %i | %o, %x, %X | %f
 --------- | ------------ | --------- | ----------
 hh | signed char | unsigned char | -
 h | short int | unsigned short int | -
@@ -44,5 +44,5 @@ Flag | Description
 ' ' | Display space if no sign
 
 Other features:
-- __precision__ and 
-- __minimum field-width__.
+- __precision__
+- __minimum field-width__
