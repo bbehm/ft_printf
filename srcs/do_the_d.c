@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_the_d.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:00:51 by bbehm             #+#    #+#             */
-/*   Updated: 2020/02/24 16:59:19 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/11 15:10:15 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ static intmax_t	get_num(t_tab *tab)
 {
 	intmax_t num;
 
-	if (tab->specifier_flag == 'D')
-		num = (long)(va_arg(tab->args, long int));
-	else if (ft_strcmp(tab->argument_flag, "hh") == 0)
+	if (ft_strcmp(tab->argument_flag, "hh") == 0)
 		num = (signed char)(va_arg(tab->args, int));
 	else if (ft_strcmp(tab->argument_flag, "h") == 0)
 		num = (short)(va_arg(tab->args, int));
@@ -39,10 +37,6 @@ static intmax_t	get_num(t_tab *tab)
 		num = (long long)(va_arg(tab->args, long long int));
 	else if (ft_strcmp(tab->argument_flag, "l") == 0)
 		num = (long)(va_arg(tab->args, long int));
-	else if (ft_strcmp(tab->argument_flag, "j") == 0)
-		num = (intmax_t)(va_arg(tab->args, intmax_t));
-	else if (ft_strcmp(tab->argument_flag, "z") == 0)
-		num = (size_t)(va_arg(tab->args, size_t));
 	else
 		num = (int)(va_arg(tab->args, int));
 	num = (intmax_t)num;

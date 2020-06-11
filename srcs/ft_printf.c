@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 12:58:55 by bbehm             #+#    #+#             */
-/*   Updated: 2020/02/16 12:19:49 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/11 13:26:08 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 int	ft_printf(const char *format, ...)
 {
-	t_tab *tab;
+	t_tab	*tab;
 
 	if (!(tab = (t_tab*)malloc(sizeof(t_tab))))
 		return (-1);
