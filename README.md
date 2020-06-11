@@ -38,9 +38,11 @@ The following flags are also handled:
 Flag | Description
 -------- | -----------
 '#' | Adds prefixes or shows decimal point 
-0 | Pad with leading zeros
-- | Left justify
-+ | Always display sign
-space | Display space if no sign
+'0' | Pad with leading zeros
+'-' | Left justify
+'+' | Always display sign
+' ' | Display space if no sign
 
-As well as __precision__ and __minimum field-width__.
+Other features:
+- __precision__ and 
+- __minimum field-width__.
