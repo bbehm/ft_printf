@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_the_o.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 17:19:52 by bbehm             #+#    #+#             */
-/*   Updated: 2020/02/24 12:39:48 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/15 15:11:38 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static t_tab		*display(t_tab *tab, uintmax_t num, char *str, size_t left)
 	return (tab);
 }
 
-t_tab				*do_the_o(t_tab *tab)
+t_tab				*do_the_o(t_tab *tab, char flag)
 {
 	char		*str;
 	uintmax_t	num;

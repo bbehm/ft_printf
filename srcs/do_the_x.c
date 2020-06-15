@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_the_x.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 17:19:39 by bbehm             #+#    #+#             */
-/*   Updated: 2020/02/24 17:02:23 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/15 15:11:10 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static t_tab		*do_more_x(t_tab *tab, uintmax_t num, char *str, int l_a)
 	return (tab);
 }
 
-t_tab				*do_the_x(t_tab *tab)
+t_tab				*do_the_x(t_tab *tab, char flag)
 {
 	char		*str;
 	char		cases;

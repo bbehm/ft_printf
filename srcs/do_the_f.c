@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 11:24:42 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/11 12:00:16 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/15 13:59:18 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,15 @@ static void do_more_f(t_tab *tab)
     do_further_f(tab);
 }
 
+#include <stdio.h>
+
 void    do_the_f(t_tab *tab)
 {
     int round;
 
     round = tab->precision;
     tab->output_f = (double)va_arg(tab->args, double);
+    printf("output_f: %Lf\n", tab->output_f);
     (tab->precision >= 1) ? tab->dot = 1 : 0;
     tab->sign = (tab->output_f < 0) ? 1 : 0;
     if (tab->precision == 0)
