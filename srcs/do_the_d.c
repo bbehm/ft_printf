@@ -6,110 +6,72 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:00:51 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/11 15:10:15 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/18 09:36:36 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include "../libft/includes/libft.h"
 
-static int		num_len(intmax_t num)
+static void 	do_final(t_tab *tab)
 {
-	int tens;
-
-	if (num < 0)
-		num *= -1;
-	tens = 1;
-	while ((num /= 10) > 0)
-		tens++;
-	return (tens);
-}
-
-static intmax_t	get_num(t_tab *tab)
-{
-	intmax_t num;
-
-	if (ft_strcmp(tab->argument_flag, "hh") == 0)
-		num = (signed char)(va_arg(tab->args, int));
-	else if (ft_strcmp(tab->argument_flag, "h") == 0)
-		num = (short)(va_arg(tab->args, int));
-	else if (ft_strcmp(tab->argument_flag, "ll") == 0)
-		num = (long long)(va_arg(tab->args, long long int));
-	else if (ft_strcmp(tab->argument_flag, "l") == 0)
-		num = (long)(va_arg(tab->args, long int));
-	else
-		num = (int)(va_arg(tab->args, int));
-	num = (intmax_t)num;
-	return (num);
-}
-
-static char		get_negativity(t_tab *tab, int is_negative)
-{
-	char *temp;
-
-	temp = tab->convert;
-	if (is_negative)
-		return ('-');
-	if (temp[1] == '+')
-		return ('+');
-	if (temp[2] == ' ')
-		return (' ');
-	return ('\0');
-}
-
-static t_tab	*do_more(t_tab *tab, intmax_t num, int n_w, int l_a)
-{
-	int		is_blank;
-	int		is_negative;
-	char	negativity;
-
-	is_negative = (num < 0) ? 1 : 0;
-	num *= (is_negative && num != (-9223372036854775807 - 1)) ? -1 : 1;
-	negativity = get_negativity(tab, is_negative);
-	is_blank = n_w;
-	if (n_w <= tab->precision && tab->precision >= 0)
-		is_blank = tab->precision;
-	if (negativity)
-		is_blank++;
-	tab->length += (is_blank <= tab->width) ? tab->width : is_blank;
-	if (!l_a)
-		do_gap(tab, ' ', tab->width - is_blank, 0);
-	if (negativity)
-		write(1, &negativity, 1);
-	do_gap(tab, '0', tab->precision - n_w, 0);
-	if (num != (-9223372036854775807 - 1))
-		ft_putnbrmax_fd(num, 1);
-	else if ((tab->length += 18) > 0)
-		write(1, "9223372036854775808", 19);
-	if (l_a)
-		do_gap(tab, ' ', tab->width - is_blank, 0);
-	return (tab);
-}
-
-t_tab			*do_the_d(t_tab *tab)
-{
-	intmax_t	num;
-	int			num_width;
-	int			left_align;
-
-	num = get_num(tab);
-	if (num == 0 && tab->precision == 0)
+	if (tab->minus)
 	{
-		if (tab->convert[1] == '+')
-			show_char('+', tab);
-		if (tab->convert[2] == ' ')
-			show_char(' ', tab);
-		do_gap(tab, ' ', tab->width, 1);
-		return (tab);
+		if (tab->output < 0)
+		{
+			ft_putchar_size('-', tab->size);
+			tab->output *= -1;
+		}
+		!(tab->num && tab->output == 0) ? ft_putnbr_size(tab->output, tab->size) : 0;
+		(tab->output >= 0 && (tab->plus || tab->space) && !(tab->precision < tab->len) && !tab->sign) ? tab->len += 1 : 0;
+		tab->sign == 1 && !(tab->precision < tab->len) ? tab->len += 1 : 0;
+		ft_put_spaces(tab->width, tab->len, tab->size);
+		return ;
 	}
-	num_width = num_len(num);
-	left_align = (tab->convert[0] == '-') ? 1 : 0;
-	if (tab->convert[3] == '0' && tab->precision == -1 && !tab->convert[0])
+	if (tab->num && tab->output == 0)
+		return ;
+	ft_putnbr_size(tab->output, tab->size);
+}
+
+static void		do_further(t_tab *tab)
+{
+	tab->space && !tab->minus && tab->width && !tab->zero && tab->precision ? do_gap(tab->width, tab->len, tab->size) : 0;
+	if (tab->output >= 0 && (tab->plus || tab->space))
+		tab->plus ? ft_put_plus(tab->size) : ft_put_space(tab->size);
+	if (tab->precision || tab->zero)
 	{
-		tab->precision = tab->width;
-		if (num < 0 || tab->convert[2] || tab->convert[1] || tab->convert[0])
-			tab->precision--;
+		if (tab->output < 0)
+		{
+			ft_putchar_size('-', tab->size);
+			tab->output *= -1;
+			tab->sign = 1;
+		}
+		tab->precision ? ft_put_zeros(tab->precision, &tab->len, tab->size) : 0;
+		tab->zero && !tab->precision && !tab->minus ? ft_put_zeros(tab->width, &tab->len, tab->size) : 0;
 	}
-	do_more(tab, num, num_width, left_align);
-	return (tab);
+	do_final(tab);
+}
+
+static void		do_more(t_tab *tab)
+{
+	tab->width && !tab->zero && !tab->space && !tab->minus && !tab->precision ? do_gap(tab->width, tab->len, tab->size) : 0;
+	if (tab->width && tab->precision && !tab->minus)
+	{
+		if (tab->width > tab->precision && tab->precision > tab->len)
+			(tab->plus || tab->space || tab->output < 0) ? do_gap(tab->width, tab->precision + 1, tab->size) : do_gap(tab->width, tab->precision, tab->size);
+		else if (tab->width > tab->precision && tab->width > tab->len)
+			do_gap(tab->width, tab->len, tab->size);
+		do_further(tab);
+	}
+}
+
+void			do_the_d(t_tab *tab)
+{
+	typecast_int(tab);
+	tab->len = ft_numlen(tab->output);
+	tab->len = (tab->output >= 0 && (tab->plus || tab->space) && tab->precision < tab->width && tab->precision <= tab->len) ? tab->len + 1 : tab->len;
+	tab->len = (tab->precision >= tab->len && tab->output < 0) ? tab->len - 1 : tab->len;
+	tab->num && tab->output == 0 ? tab->len = 0 : 0;
+	tab->num && tab->output == 0 && (tab->plus || tab->space) ? tab->len = 1 : 0;
+	do_more(tab);
 }
