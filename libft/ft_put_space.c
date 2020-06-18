@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_spaces.c                                    :+:      :+:    :+:   */
+/*   ft_put_space.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/11 11:58:48 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/18 09:43:20 by bbehm            ###   ########.fr       */
+/*   Created: 2020/06/18 09:48:39 by bbehm             #+#    #+#             */
+/*   Updated: 2020/06/18 09:48:58 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-void    ft_put_spaces(int min, int size, int *bytes)
+void    ft_put_space(int *bytes)
 {
-    int i;
-
-	i = 0;
-	if (min < size)
-		return ;
-	while (i < (min - size))
-	{
-		ft_putchar(' ');
-		i++;
-		*bytes++;
-	}
+	*bytes++;
+	write(1, " ", 1);
 }
