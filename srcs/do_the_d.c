@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:00:51 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/18 09:36:36 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/18 09:59:33 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void 	do_final(t_tab *tab)
 
 static void		do_further(t_tab *tab)
 {
-	tab->space && !tab->minus && tab->width && !tab->zero && tab->precision ? do_gap(tab->width, tab->len, tab->size) : 0;
+	tab->space && !tab->minus && tab->width && !tab->zero && tab->precision ? ft_put_spaces(tab->width, tab->len, tab->size) : 0;
 	if (tab->output >= 0 && (tab->plus || tab->space))
 		tab->plus ? ft_put_plus(tab->size) : ft_put_space(tab->size);
 	if (tab->precision || tab->zero)
@@ -54,13 +54,13 @@ static void		do_further(t_tab *tab)
 
 static void		do_more(t_tab *tab)
 {
-	tab->width && !tab->zero && !tab->space && !tab->minus && !tab->precision ? do_gap(tab->width, tab->len, tab->size) : 0;
+	tab->width && !tab->zero && !tab->space && !tab->minus && !tab->precision ? ft_put_spaces(tab->width, tab->len, tab->size) : 0;
 	if (tab->width && tab->precision && !tab->minus)
 	{
 		if (tab->width > tab->precision && tab->precision > tab->len)
-			(tab->plus || tab->space || tab->output < 0) ? do_gap(tab->width, tab->precision + 1, tab->size) : do_gap(tab->width, tab->precision, tab->size);
+			(tab->plus || tab->space || tab->output < 0) ? ft_put_spaces(tab->width, tab->precision + 1, tab->size) : ft_put_spaces(tab->width, tab->precision, tab->size);
 		else if (tab->width > tab->precision && tab->width > tab->len)
-			do_gap(tab->width, tab->len, tab->size);
+			ft_put_spaces(tab->width, tab->len, tab->size);
 		do_further(tab);
 	}
 }
