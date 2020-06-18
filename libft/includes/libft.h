@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 15:52:15 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/11 11:55:02 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/18 09:38:23 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ void				ft_putnbrmax_fd(intmax_t n, int fd);
 void    			ft_put_zeros(int max, int *len);
 char                *ft_ftoa(long double f, int precision, int dot);
 void    			ft_put_spaces(int min, int size);
+static int			ft_numlen(long long num);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:02:03 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/15 15:11:46 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/18 09:16:54 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_tab			*boost(t_tab *tab);
 t_tab			*fix_conversion(t_tab *tab);
 t_tab			*fix_precision(t_tab *tab);
 void 			fix_width(t_tab *tab, const char *format);
-void			*do_the_d(t_tab *tab);
+void			do_the_d(t_tab *tab);
 void			*do_the_c(t_tab *tab);
 t_tab			*do_the_ws(t_tab *tab);
 void			*do_the_s(t_tab *tab);
