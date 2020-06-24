@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 15:52:15 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/18 09:49:09 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/24 10:44:56 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,15 @@ int					ft_isupper(int c);
 int					ft_islower(int c);
 int					ft_isspace(int c);
 int					ft_intlen(int n);
-char				*ft_itoa_base_mod(uintmax_t num, uintmax_t base, char c);
 void				ft_putnbrmax_fd(intmax_t n, int fd);
 void    			ft_put_zeros(int max, int *length, int *bytes);
 char                *ft_ftoa(long double f, int precision, int dot);
 void    			ft_put_spaces(int min, int size, int *bytes);
-static int			ft_numlen(long long num);
+int					ft_numlen(long long num);
 void   				ft_put_plus(int *bytes);
 void    			ft_put_space(int *bytes);
+void				ft_putchar_size(char c, int *size);
+void				ft_putnbr_size(int n, int *size);
+char				*ft_itoa_base(int value, int base);
 
 #endif
