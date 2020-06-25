@@ -3,63 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   do_the_p.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 17:20:07 by bbehm             #+#    #+#             */
-/*   Updated: 2020/02/24 16:59:53 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/25 15:49:18 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include "../libft/includes/libft.h"
 
-static uintmax_t	get_num(t_tab *tab)
+void	do_the_p(t_tab *tab, char flag)
 {
-	uintmax_t num;
-
-	num = (unsigned long)(va_arg(tab->args, unsigned long int));
-	num = (uintmax_t)num;
-	return (num);
-}
-
-static t_tab		*do_more_u(t_tab *tab, char *str, int left_align)
-{
-	int is_blank;
-	int num_width;
-
-	num_width = ft_strlen(str) + 2;
-	is_blank = num_width;
-	tab->length += (is_blank <= tab->width) ? tab->width : is_blank;
-	if (!left_align)
-		do_gap(tab, ' ', tab->width - is_blank, 0);
-	write(1, "0x", 2);
-	do_gap(tab, '0', (tab->precision - num_width) + 2, 1);
-	ft_putstr(str);
-	if (left_align)
-		do_gap(tab, ' ', tab->width - is_blank, 0);
-	free(str);
-	return (tab);
-}
-
-t_tab				*do_the_p(t_tab *tab)
-{
-	char		*str;
-	int			left_align;
-	uintmax_t	num;
-
-	left_align = 0;
-	num = get_num(tab);
-	if (!(str = ft_itoa_base_mod(num, 16, 'a')))
-		exit(-1);
-	if (tab->convert[0] == '-')
-		left_align = 1;
-	if (tab->precision == 0 && num == 0)
-		*str = '\0';
-	if (tab->convert[3] == '0' && tab->precision == -1 && !tab->convert[0])
+	tab->output_u = (unsigned long)va_arg(tab->args, void*);
+	tab->nbr = ft_itoa_base_ul(tab->output_u, 16);
+	if (!tab->minus && tab->width)
+		ft_put_spaces(tab->width, ft_strlen(tab->nbr) + 2, tab->size);
+	if (tab->minus)
 	{
-		tab->precision = tab->width - 2;
-		tab->width = 0;
+		ft_putstr_size("0x", tab->size);
+		if (!tab->num && tab->output_u != 0)
+			ft_itoa_base_size(tab->output_u, 16, tab->size, flag);
+		ft_put_spaces(tab->width, ft_strlen(tab->nbr) + 2, tab->size);
+		free(tab->nbr);
+		return ;
 	}
-	do_more_u(tab, str, left_align);
-	return (tab);
+	free(tab->nbr);
+	ft_putstr_size("0x", tab->size);
+	if (tab->output_u != 0 && !tab->num)
+		ft_itoa_base_size(tab->output_u, 16, tab->size, flag);
+	return ;
 }

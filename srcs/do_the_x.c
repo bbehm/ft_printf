@@ -6,98 +6,85 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 17:19:39 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/15 15:11:10 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/25 16:57:49 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include "../libft/includes/libft.h"
-#include <stdio.h>
 
-static uintmax_t	get_num(t_tab *tab)
+static void		typecast_x(t_tab *tab)
 {
-	uintmax_t	num;
-
-	if (tab->specifier_flag == 'U')
-		num = (unsigned long)(va_arg(tab->args, unsigned long int));
-	else if (ft_strcmp(tab->argument_flag, "hh") == 0)
-		num = (unsigned char)(va_arg(tab->args, unsigned int));
-	else if (ft_strcmp(tab->argument_flag, "h") == 0)
-		num = (unsigned short)(va_arg(tab->args, unsigned int));
-	else if (ft_strcmp(tab->argument_flag, "ll") == 0)
-		num = (unsigned long long)(va_arg(tab->args, unsigned long long int));
-	else if (ft_strcmp(tab->argument_flag, "l") == 0)
-		num = (unsigned long)(va_arg(tab->args, unsigned long int));
-	else if (ft_strcmp(tab->argument_flag, "j") == 0)
-		num = (uintmax_t)(va_arg(tab->args, uintmax_t));
-	else if (ft_strcmp(tab->argument_flag, "z") == 0)
-		num = (size_t)(va_arg(tab->args, size_t));
+	if (tab->length == 'a')
+		tab->output_u = (unsigned long)va_arg(tab->args, void*);
+	else if (tab->length == 'A')
+		tab->output_u = (unsigned long long)va_arg(tab->args, void*);
+	else if (tab->length == 'h')
+		tab->output_u = (unsigned short)va_arg(tab->args, void*);
+	else if (tab->length == 'H')
+		tab->output_u = (unsigned char)va_arg(tab->args, void*);
 	else
-		num = (unsigned int)(va_arg(tab->args, unsigned int));
-	num = (uintmax_t)num;
-	return (num);
+		tab->output_u = va_arg(tab->args, unsigned int);
 }
 
-static void			display_zero(uintmax_t num, char hash, char flag)
+static void		do_final_x(t_tab *tab, char flag)
 {
-	if (num)
+	(tab->zero || tab->precision) ? ft_put_zeros(tab->precision, &tab->len, tab->size) : 0;
+	if (tab->minus)
 	{
-		if (hash == '#' && flag == 'x')
-			write(1, "0x", 2);
-		if (hash == '#' && flag == 'X')
-			write(1, "0X", 2);
+		if (!tab->num && tab->output_u != 0)
+			ft_itoa_base_size(tab->output_u, 16, tab->size, flag);
+		if (tab->hash && tab->output_u != 0 && tab->precision >= tab->len)
+			tab->len = tab->len + 2;
+		ft_put_spaces(tab->width, tab->len, tab->size);
+		return ;
 	}
+	if (tab->output_u != 0 && !tab->num)
+		ft_itoa_base_size(tab->output_u, 16, tab->size, flag);
+	return ;
 }
 
-static t_tab		*do_more_x(t_tab *tab, uintmax_t num, char *str, int l_a)
+static void		do_further_x(t_tab *tab, char flag)
 {
-	int is_blank;
-	int num_width;
-
-	if ((num_width = ft_strlen(str)) && tab->convert[4] == '#' && num &&
-			tab->convert[3] == '0' && tab->width)
-		num_width += 2;
-	else if ((num_width = ft_strlen(str)) && tab->convert[4] == '#' && num)
+	if (tab->hash)
 	{
-		tab->width -= 2;
-		tab->length += 2;
+		if (tab->output_u != 0)
+		{
+			if (flag == 'x')
+				ft_putstr_size("0x", tab->size);
+			else
+				ft_putstr_size("0X", tab->size);
+			if (!tab->minus && tab->zero)
+			{
+				tab->precision ? ft_put_zeros(tab->precision, &tab->len, tab->size) : 0;
+				!tab->precision && !tab->minus && tab->zero ? ft_put_zeros(tab->width, &tab->len, tab->size) : 0;
+			}
+		}
 	}
-	is_blank = (num_width <= tab->precision && tab->precision > 0) ?
-		tab->precision : num_width;
-	tab->length += (is_blank <= tab->width) ? tab->width : is_blank;
-	if (!l_a)
-		do_gap(tab, ' ', tab->width - is_blank, 0);
-	display_zero(num, tab->convert[4], tab->specifier_flag);
-	ft_putstr(str);
-	if (l_a)
-		do_gap(tab, ' ', tab->width - is_blank, 0);
-	return (tab);
+	do_final_x(tab, flag);
 }
 
-t_tab				*do_the_x(t_tab *tab, char flag)
+static void		do_more_x(t_tab *tab, char flag)
 {
-	char		*str;
-	char		cases;
-	int			left_align;
-	uintmax_t	num;
-
-	left_align = 0;
-	num = get_num(tab);
-	if (num == 0 && tab->precision == 0)
+	tab->width && !tab->minus && !tab->precision && !tab->zero ? ft_put_spaces(tab->width, tab->len, tab->size) : 0;
+	if (tab->precision && tab->width && !tab->minus)
 	{
-		do_gap(tab, ' ', tab->width, 1);
-		return (tab);
+		if (tab->precision < tab->width && tab->precision > tab->len)
+			(tab->hash && tab->output_u != 0) ? ft_put_spaces(tab->width, tab->precision + 2, tab->size) : ft_put_spaces(tab->width, tab->precision, tab->size);
+		else if (tab->precision < tab->width && tab->len < tab->width)
+			ft_put_spaces(tab->width, tab->len, tab->size);
 	}
-	cases = 'a';
-	if (tab->specifier_flag == 'X')
-		cases = 'A';
-	if (!(str = ft_itoa_base_mod(num, 16, cases)))
-		exit(-1);
-	if (tab->convert[0] == '-')
-		left_align = 1;
-	if (tab->convert[3] == '0' && tab->precision == -1 && !tab->convert[0])
-		tab->precision = tab->width;
-	do_more_x(tab, num, str, left_align);
-	free(str);
-	return (tab);
+	tab->zero && tab->width && !tab->precision && !tab->hash ? ft_put_zeros(tab->width, &tab->len, tab->size) : 0;
+	do_further_x(tab, flag);
+}
+
+void			do_the_x(t_tab *tab, char flag)
+{
+	typecast_x(tab);
+	tab->nbr = ft_itoa_base(tab->output_u, 16);
+	tab->len = ft_strlen(tab->nbr);
+	free(tab->nbr);
+	tab->len = (tab->hash && tab->output_u != 0 && tab->width > tab->precision && tab->precision <= tab->len) ? tab->len + 2 : tab->len;
+	tab->num && tab->output_u == 0 ? tab->len = 0 : 0;
+	do_more_x(tab, flag);
 }

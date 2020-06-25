@@ -6,93 +6,73 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 17:19:27 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/10 11:03:35 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/25 16:57:39 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include "../libft/includes/libft.h"
 
+static void		typecast_u(t_tab *tab)
+{
+	if (tab->length == 'a')
+		tab->output_u = (unsigned long)va_arg(tab->args, void*);
+	else if (tab->length == 'A')
+		tab->output_u = (unsigned long long)va_arg(tab->args, void*);
+	else if (tab->length == 'h')
+		tab->output_u = (unsigned short)va_arg(tab->args, void*);
+	else if (tab->length == 'H')
+		tab->output_u = (unsigned char)va_arg(tab->args, void*);
+	else
+		tab->output_u = va_arg(tab->args, unsigned int);
+}
+
+static void		ft_putnbr_u(uintmax_t n, int *size)
+{
+	if (n < 0)
+	{
+		ft_putchar_size('-', size);
+		n = -n;
+	}
+	if (n / 10)
+	{
+		ft_putnbr_u(n / 10, size);
+	}
+	*size = *size + 1;
+	ft_putchar(n % 10 + '0');
+}
+
+static void		do_more_u(t_tab *tab)
+{
+	tab->width && tab->zero && !tab->precision ? ft_put_zeros(tab->width, &tab->len, tab->size) : 0;
+	tab->precision || tab->zero ? ft_put_zeros(tab->precision, &tab->len, tab->size) : 0;
+	if (tab->minus)
+	{
+		!(tab->num && tab->output_u == 0) ? ft_putnbr_size(tab->output_u, tab->size) : 0;
+		ft_put_spaces(tab->width, tab->len, tab->size);
+		return ;
+	}
+	if (tab->num && tab->output_u == 0)
+		return ;
+	ft_putnbr_u(tab->output_u, tab->size);
+}
+
 /*
-** This function handles unsigned 
+** This function handles unsigned values
 */
 
-void				ft_putnbrumax_fd(uintmax_t n, int fd)
+void			do_the_u(t_tab *tab)
 {
-	if (n > 9)
-		ft_putnbrumax_fd(n / 10, fd);
-	ft_putchar_fd((n % 10) + '0', fd);
-}
-
-static uintmax_t	get_num(t_tab *tab)
-{
-	uintmax_t	num;
-
-	if (tab->specifier_flag == 'U')
-		num = (unsigned long)(va_arg(tab->args, unsigned long int));
-	else if (ft_strcmp(tab->argument_flag, "hh") == 0)
-		num = (unsigned char)(va_arg(tab->args, unsigned int));
-	else if (ft_strcmp(tab->argument_flag, "h") == 0)
-		num = (unsigned short)(va_arg(tab->args, unsigned int));
-	else if (ft_strcmp(tab->argument_flag, "ll") == 0)
-		num = (unsigned long long)(va_arg(tab->args, unsigned long long int));
-	else if (ft_strcmp(tab->argument_flag, "l") == 0)
-		num = (unsigned long)(va_arg(tab->args, unsigned long int));
-	else if (ft_strcmp(tab->argument_flag, "j") == 0)
-		num = (uintmax_t)(va_arg(tab->args, uintmax_t));
-	else if (ft_strcmp(tab->argument_flag, "z") == 0)
-		num = (size_t)(va_arg(tab->args, size_t));
-	else
-		num = (unsigned int)(va_arg(tab->args, unsigned int));
-	num = (uintmax_t)num;
-	return (num);
-}
-
-static int			num_len(uintmax_t num)
-{
-	int len;
-
-	len = 1;
-	while ((num /= 10) > 0)
-		len++;
-	return (len);
-}
-
-static t_tab		*do_more_u(t_tab *tab, uintmax_t num, int n_w, int l)
-{
-	int is_blank;
-
-	is_blank = n_w;
-	if (n_w <= tab->precision)
-		is_blank = tab->precision;
-	tab->length += (is_blank <= tab->width) ? tab->width : is_blank;
-	if (!l)
-		do_gap(tab, ' ', tab->width - is_blank, 0);
-	do_gap(tab, '0', tab->precision - n_w, 0);
-	ft_putnbrumax_fd(num, 1);
-	if (l)
-		do_gap(tab, ' ', tab->width - is_blank, 0);
-	return (tab);
-}
-
-t_tab				*do_the_u(t_tab *tab)
-{
-	uintmax_t	num;
-	int			num_width;
-	int			left;
-
-	left = 0;
-	num = get_num(tab);
-	if (num == 0 && tab->precision == 0)
+	typecast_u(tab);
+	tab->len = ft_numlen(tab->output_u);
+	(tab->num == -1 || tab->num == -2) && tab->output_u == 0 ? tab->len = 0 : 0;
+	tab->width && !tab->zero && !tab->minus && !tab->precision ? ft_put_spaces(tab->width, tab->len, tab->size) : 0;
+	if (tab->width && tab->precision && !tab->minus)
 	{
-		do_gap(tab, ' ', tab->width, 1);
-		return (tab);
+		if (tab->width > tab->precision && tab->precision > tab->len)
+			(tab->plus || tab->space) ? ft_put_spaces(tab->width, tab->precision + 1, tab->size) : ft_put_spaces(tab->width, tab->precision, tab->size);
+		else if (tab->width > tab->precision && tab->width > tab->len)
+			ft_put_spaces(tab->width, tab->len, tab->size);
 	}
-	num_width = num_len(num);
-	if (num == 0 && tab->precision == 0)
-		left = 1;
-	if (tab->convert[3] == '0' && tab->precision == -1 && !tab->convert[0])
-		tab->precision = tab->width;
-	do_more_u(tab, num, num_width, left);
-	return (tab);
+	do_more_u(tab);
 }

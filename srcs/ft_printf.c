@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 12:58:55 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/11 13:26:08 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/25 17:23:37 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,23 @@
 
 int	ft_printf(const char *format, ...)
 {
-	t_tab	*tab;
+	t_tab	tab;
+	int		size;
 
-	if (!(tab = (t_tab*)malloc(sizeof(t_tab))))
-		return (-1);
-	tab->form = format;
-	tab = initialize(tab);
-	if (format)
+	size = 0;
+	tab.i = -1;
+	tab.size = &size;
+	va_start(tab.args, format);
+	while (format[++tab.i] != '\0')
 	{
-		va_start(tab->args, format);
-		tab->length = parse(tab);
-		va_end(tab->args);
+		initialize(&tab);
+		if (format[tab.i] == '%')
+			parse(&tab, format);
+		else
+			ft_putchar_size(format[tab.i], tab.size);
+		if (format[tab.i] == '\0')
+			return (0);
 	}
-	free(tab);
-	return (tab->length);
+	va_end(tab.args);
+	return (*tab.size);
 }

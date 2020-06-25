@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:02:03 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/18 09:16:54 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/25 17:10:31 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdarg.h>
 # include <ctype.h>
+# include <stdlib.h>
 
 /*
 ** This struct holds all the relevant information on flags and info we need to
@@ -47,26 +48,25 @@ typedef struct	s_tab
 }				t_tab;
 
 int				ft_printf(const char *format, ...);
-int				fix(t_tab *tab);
 void			parse(t_tab *tab, const char *format);
-
-t_tab			*display_options(t_tab *tab);
-t_tab			*initialize(t_tab *tab);
-t_tab			*boost(t_tab *tab);
-t_tab			*fix_conversion(t_tab *tab);
-t_tab			*fix_precision(t_tab *tab);
+void			initialize(t_tab *tab);
+void			fix_precision(t_tab *tab, const char *format);
 void 			fix_width(t_tab *tab, const char *format);
 void			do_the_d(t_tab *tab);
-void			*do_the_c(t_tab *tab);
-t_tab			*do_the_ws(t_tab *tab);
-void			*do_the_s(t_tab *tab);
-void			*do_the_o(t_tab *tab, char flag);
-void			*do_the_u(t_tab *tab);
-void			*do_the_x(t_tab *tab, char flag);
-void			*do_the_p(t_tab *tab);
+void			do_the_c(t_tab *tab);
+void			do_the_s(t_tab *tab);
+void			do_the_o(t_tab *tab, char flag);
+void			do_the_u(t_tab *tab);
+void			do_the_x(t_tab *tab, char flag);
+void			do_the_p(t_tab *tab, char flag);
 void    		percent_flag(t_tab *tab);
 void    		do_the_f(t_tab *tab);
 void			do_gap(t_tab *tab, char c, int len, int new_len);
 void			show_char(wint_t c, t_tab *tab);
+void			fix_h(t_tab *tab, const char *str);
+void			fix_hh(t_tab *tab, const char *str);
+void			fix_ll(t_tab *tab, const char *str);
+void			fix_l(t_tab *tab, const char *str);
+void			fix_f(t_tab *tab, const char *str);
 
 #endif

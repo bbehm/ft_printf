@@ -6,70 +6,137 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:38:47 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/15 15:01:56 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/25 16:56:27 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include "../libft/includes/libft.h"
-#include <unistd.h>
-#include <ctype.h>
-#include <stdarg.h>
 
-t_tab	*display_options(t_tab *tab)
-{
-	char *conv;
-
-	conv = &tab->specifier_flag;
-	if (*conv == 'd' || *conv == 'i')
-		do_the_d(tab);
-	else if (*conv == 'c')
-		do_the_c(tab);
-	else if (*conv == 's' && ft_strcmp(tab->argument_flag, "l") == 0)
-		do_the_ws(tab);
-	else if (*conv == 's')
-		do_the_s(tab);
-	else if (*conv == 'u')
-		do_the_u(tab);
-	else if (*conv == 'x' || *conv == 'X')
-		do_the_x(tab);
-	else if (*conv == 'o')
-		do_the_o(tab);
-	else if (*conv == 'p')
-		do_the_p(tab);
-	else if (*conv == 'f')
-		do_the_f(tab);
-	else
-		leftover(tab);
-	return (tab);
-}
-
-static void	flag_options(t_tab *tab)
-{
-	char *flag;
-
-	flag = &tab->specifier_flag;
-	if (*flag == '#')
-		tab->hash = 1;
-	else if (*flag == '-')
-		tab->minus = 1;
-	else if (*flag == ' ')
-		tab->space = 1;
-	else if (*flag == '0')
-		tab->zero = 1;
-	else if (*flag == '+')
-		tab->plus = 1;
-}
-
-int		fix(t_tab *tab)
+void	fix_h(t_tab *tab, const char *str)
 {
 	tab->i++;
-	fix_conversion(tab);
-	fix_width(tab);
-	fix_precision(tab);
-	fix_arguments(tab);
-	fix_specifier(tab);
-	flag_options(tab);
-	display_options(tab);
-	return (tab->length);
+	tab->flag = str[tab->i];
+	if (tab->flag == 'd' || tab->flag == 'i')
+	{
+		tab->length = 'h';
+		do_the_d(tab);
+	}
+	else if (tab->flag == 'u')
+	{
+		tab->length = 'h';
+		do_the_u(tab);
+	}
+	else if (tab->flag == 'o')
+	{
+		tab->length = 'h';
+		do_the_o(tab, tab->flag);
+	}
+	else if (tab->flag == 'x' || tab->flag == 'X')
+	{
+		tab->length = 'h';
+		do_the_x(tab, tab->flag);
+	}
+	else
+		tab->i = tab->i - 1;
+
+}
+
+void	fix_hh(t_tab *tab, const char *str)
+{
+	tab->i = tab->i + 2;
+	tab->flag = str[tab->i];
+	if (tab->flag == 'd' || tab->flag == 'i')
+	{
+		tab->length = 'H';
+		do_the_d(tab);
+	}
+	else if (tab->flag == 'u')
+	{
+		tab->length = 'H';
+		do_the_u(tab);
+	}
+	else if (tab->flag == 'o')
+	{
+		tab->length = 'H';
+		do_the_o(tab, tab->flag);
+	}
+	else if (tab->flag == 'x' || tab->flag == 'X')
+	{
+		tab->length = 'H';
+		do_the_x(tab, tab->flag);
+	}
+	else
+		tab->i = tab->i - 2;
+}
+
+void	fix_ll(t_tab *tab, const char *str)
+{
+	tab->i = tab->i + 2;
+	tab->flag = str[tab->i];
+	if (tab->flag == 'd' || tab->flag == 'i')
+	{
+		tab->length = 'A';
+		do_the_d(tab);
+	}
+	else if (tab->flag == 'u')
+	{
+		tab->length = 'A';
+		do_the_u(tab);
+	}
+	else if (tab->flag == 'A')
+	{
+		tab->length = 'A';
+		do_the_o(tab, tab->flag);
+	}
+	else if (tab->flag == 'x' || tab->flag == 'X')
+	{
+		tab->length = 'A';
+		do_the_x(tab, tab->flag);
+	}
+	else
+		tab->i = tab->i - 2;
+}
+
+void	fix_l(t_tab *tab, const char *str)
+{
+	tab->i++;
+	tab->flag = str[tab->i];
+	if (tab->flag == 'd' || tab->flag == 'i')
+	{
+		tab->length = 'a';
+		do_the_d(tab);
+	}
+	else if (tab->flag == 'u')
+	{
+		tab->length = 'a';
+		do_the_u(tab);
+	}
+	else if (tab->flag == 'o')
+	{
+		tab->length = 'a';
+		do_the_o(tab, tab->flag);
+	}
+	else if (tab->flag == 'x' || tab->flag == 'X')
+	{
+		tab->length = 'a';
+		do_the_x(tab, tab->flag);
+	}
+	else
+		tab->i = tab->i - 1;
+}
+
+void	fix_f(t_tab *tab, const char *str)
+{
+	tab->i = tab->i + 1;
+	tab->flag = str[tab->i];
+	if (str[tab->i - 1] == 'l')
+		do_the_f(tab);
+	else if (tab->flag == 'f')
+	{
+		tab->length = 'a';
+		do_the_f(tab);
+	}
+	else
+		tab->i = tab->i - 1;
 }
