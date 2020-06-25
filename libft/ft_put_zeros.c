@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 11:47:08 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/18 09:45:02 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/25 15:12:02 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void    ft_put_zeros(int max, int *length, int *bytes)
     {
         write(1, "0", 1);
         i++;
-        *length++;
-        *bytes++;
+        *length = *length + 1;
+        *bytes = *bytes + 1;
     }
 }

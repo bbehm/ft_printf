@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 10:53:34 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/18 10:54:00 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/25 15:12:19 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	ft_putchar_size(char c, int *size)
 {
 	write(1, &c, 1);
-    *size++;
+    *size = *size + 1;
 }

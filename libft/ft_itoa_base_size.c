@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 10:38:57 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/25 11:52:49 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/25 15:11:23 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ int                 ft_itoa_base_size(unsigned long long value, int base, int *s
         res[length--] = base_str[value % base];
         value /= base;
     }
-    print_res(res, size, flag);
+    print_result(res, size, flag);
     return (1);  
 }

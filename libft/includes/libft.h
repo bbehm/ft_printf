@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 15:52:15 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/25 11:53:33 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/25 16:25:55 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,7 @@ void				ft_putchar_size(char c, int *size);
 void				ft_putnbr_size(int n, int *size);
 char				*ft_itoa_base(int value, int base);
 int                 ft_itoa_base_size(unsigned long long value, int base, int *size, char flag);
+void				ft_putstr_size(char *str, int *size);
+char				*ft_itoa_base_ul(unsigned long value, int base);
 
 #endif
