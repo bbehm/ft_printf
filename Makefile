@@ -6,7 +6,7 @@
 #    By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/15 14:59:32 by bbehm             #+#    #+#              #
-#    Updated: 2020/06/10 08:52:23 by bbehm            ###   ########.fr        #
+#    Updated: 2020/06/25 16:23:20 by bbehm            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,23 +23,20 @@ SRC_DIR =	srcs/
 LIB_DIR =	libft/
 
 CFILE =		ft_printf.c \
-			boost.c \
-			do_gap.c \
-			do_the_c.c \
 			do_the_d.c \
-			do_the_o.c \
-			do_the_p.c \
-			do_the_s.c \
 			do_the_u.c \
-			do_the_ws.c \
+			do_the_o.c \
 			do_the_x.c \
-			fix_helpers.c \
-			fix.c \
+			do_the_f.c \
+			do_the_s.c \
+			do_the_c.c \
+			do_the_p.c \
+			fix_length.c \
+			fix_width.c \
+			fix_precision.c \
 			initialize.c \
-			leftover.c \
 			parse.c \
-			show_char.c \
-			do_the_f.c
+			percent_flag.c \
 			
 
 CFIND =		$(CFILE:%=$(SRC_DIR)%)
