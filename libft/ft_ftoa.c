@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 10:19:36 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/11 12:08:41 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/26 14:47:02 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ char                *ft_ftoa(long double f, int precision, int dot)
     char                *res;
     int                 i;
 
-    f = f + rounding(precision, f);
-    f *= (f < 0);
+    f = f + rounding(f, precision);
+    f *= (f < 0) ? -1 : 1;
     value = f;
     before_dec = ft_itoa(value);
     f = precision ? (f - value) : 0;
@@ -54,5 +54,3 @@ char                *ft_ftoa(long double f, int precision, int dot)
     free(before_dec);
     return (res);
 }
-
-
