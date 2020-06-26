@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:38:47 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/25 16:56:27 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/26 11:34:56 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	fix_ll(t_tab *tab, const char *str)
 		tab->length = 'A';
 		do_the_u(tab);
 	}
-	else if (tab->flag == 'A')
+	else if (tab->flag == 'o')
 	{
 		tab->length = 'A';
 		do_the_o(tab, tab->flag);

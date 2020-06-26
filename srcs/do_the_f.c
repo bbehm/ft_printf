@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 11:24:42 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/25 17:06:42 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/26 12:23:54 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,23 @@ static void do_final_f(t_tab *tab)
             ft_putchar_size('-', tab->size);
             tab->sign = 0;
         }
-        tab->zero ? ft_put_zeros(tab->width, &tab->len, tab->size) : 0;
+        if (tab->zero)
+            ft_put_zeros(tab->width, &tab->len, tab->size);
     }
-    tab->sign && tab->nbr[0] != '-' ? ft_putchar_size('-', tab->size) : 0;
+    if (tab->sign && tab->nbr[0] != '-')
+        ft_putchar_size('-', tab->size);
     ft_putstr_size(tab->nbr, tab->size);
     free(tab->nbr);
 }
 
 static void do_further_f(t_tab *tab)
 {
-    tab->width && !tab->zero && !tab->space &&\
-    !tab->minus ? ft_put_spaces(tab->width, tab->len, tab->size) : 0;
+    if (tab->width && !tab->zero && !tab->space && !tab->minus)
+        ft_put_spaces(tab->width, tab->len, tab->size);
     if (tab->output_f >= 0 && (tab->plus || tab->space))
         tab->plus ? ft_put_plus(tab->size) : ft_put_space(tab->size);
-    tab->space && tab->width && !tab->zero && !tab->minus ?\
-    ft_put_spaces(tab->width, tab->len, tab->size) : 0;
+    if (tab->space && tab->width && !tab->zero && !tab->minus)
+        ft_put_spaces(tab->width, tab->len, tab->size);
     if (tab->minus)
     {
         if (tab->sign)

@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 17:19:39 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/25 16:57:49 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/26 12:58:06 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,20 @@ static void		typecast_x(t_tab *tab)
 
 static void		do_final_x(t_tab *tab, char flag)
 {
-	(tab->zero || tab->precision) ? ft_put_zeros(tab->precision, &tab->len, tab->size) : 0;
+	if (tab->zero || tab->precision)
+		ft_put_zeros(tab->precision, &tab->len, tab->size);
 	if (tab->minus)
 	{
-		if (!tab->num && tab->output_u != 0)
+		if (!(tab->num && tab->output_u == 0))
 			ft_itoa_base_size(tab->output_u, 16, tab->size, flag);
-		if (tab->hash && tab->output_u != 0 && tab->precision >= tab->len)
+		if ((tab->hash && tab->output_u != 0) && !(tab->precision < tab->len))
 			tab->len = tab->len + 2;
 		ft_put_spaces(tab->width, tab->len, tab->size);
 		return ;
 	}
-	if (tab->output_u != 0 && !tab->num)
-		ft_itoa_base_size(tab->output_u, 16, tab->size, flag);
-	return ;
+	if (tab->output_u == 0 && tab->num)
+		return ;
+	ft_itoa_base_size(tab->output_u, 16, tab->size, flag);
 }
 
 static void		do_further_x(t_tab *tab, char flag)
@@ -56,8 +57,10 @@ static void		do_further_x(t_tab *tab, char flag)
 				ft_putstr_size("0X", tab->size);
 			if (!tab->minus && tab->zero)
 			{
-				tab->precision ? ft_put_zeros(tab->precision, &tab->len, tab->size) : 0;
-				!tab->precision && !tab->minus && tab->zero ? ft_put_zeros(tab->width, &tab->len, tab->size) : 0;
+				if (tab->precision)
+					ft_put_zeros(tab->precision, &tab->len, tab->size);
+				if (!tab->precision && !tab->minus && tab->zero)
+					ft_put_zeros(tab->width, &tab->len, tab->size);
 			}
 		}
 	}
@@ -66,15 +69,22 @@ static void		do_further_x(t_tab *tab, char flag)
 
 static void		do_more_x(t_tab *tab, char flag)
 {
-	tab->width && !tab->minus && !tab->precision && !tab->zero ? ft_put_spaces(tab->width, tab->len, tab->size) : 0;
+	if (tab->width && !tab->minus && !tab->precision && !tab->zero)
+		ft_put_spaces(tab->width, tab->len, tab->size);
 	if (tab->precision && tab->width && !tab->minus)
 	{
 		if (tab->precision < tab->width && tab->precision > tab->len)
-			(tab->hash && tab->output_u != 0) ? ft_put_spaces(tab->width, tab->precision + 2, tab->size) : ft_put_spaces(tab->width, tab->precision, tab->size);
+		{
+			if (tab->hash && tab->output_u != 0)
+				ft_put_spaces(tab->width, tab->precision + 2, tab->size);
+			else
+				ft_put_spaces(tab->width, tab->precision, tab->size);
+		}
 		else if (tab->precision < tab->width && tab->len < tab->width)
 			ft_put_spaces(tab->width, tab->len, tab->size);
 	}
-	tab->zero && tab->width && !tab->precision && !tab->hash ? ft_put_zeros(tab->width, &tab->len, tab->size) : 0;
+	if (tab->zero && tab->width && !tab->precision && !tab->hash)
+		ft_put_zeros(tab->width, &tab->len, tab->size);
 	do_further_x(tab, flag);
 }
 
@@ -84,7 +94,9 @@ void			do_the_x(t_tab *tab, char flag)
 	tab->nbr = ft_itoa_base(tab->output_u, 16);
 	tab->len = ft_strlen(tab->nbr);
 	free(tab->nbr);
-	tab->len = (tab->hash && tab->output_u != 0 && tab->width > tab->precision && tab->precision <= tab->len) ? tab->len + 2 : tab->len;
-	tab->num && tab->output_u == 0 ? tab->len = 0 : 0;
+	if (tab->hash && tab->output_u != 0 && tab->width > tab->precision && tab->precision <= tab->len)
+		tab->len = tab->len + 2;
+	if (tab->num && tab->output_u == 0)
+		tab->len = 0;
 	do_more_x(tab, flag);
 }

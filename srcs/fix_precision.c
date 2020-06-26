@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 14:39:41 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/25 15:08:10 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/26 14:29:09 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void     continue_precision(t_tab *tab, const char *format)
     if ((format[tab->i] > '0' && format[tab->i] <= '9') && format[tab->i] != '\0')
     {
         tab->precision = ft_atoi(&format[tab->i]);
-        while (format[tab->i] >= 0 && format[tab->i] <= 9)
+        while (format[tab->i] >= '0' && format[tab->i] <= '9')
             tab->i++;
         tab->num = 0;
     }
@@ -29,14 +29,14 @@ static void     continue_precision(t_tab *tab, const char *format)
 void            fix_precision(t_tab *tab, const char *format)
 {
     tab->i = tab->i + 1;
-    if ((format[tab->i] < 0 || format[tab->i] > 9) && format[tab->i] != '*')
+    if (!(format[tab->i] >= '0' && format[tab->i] <= '9') && format[tab->i] != '*')
         tab->num = -2;
     if (format[tab->i] != '\0' && (format[tab->i] == '0' || format[tab->i] == '*'))
     {
         if (format[tab->i] == '*')
         {
             tab->precision = va_arg(tab->args, int);
-            tab->precision = 0 ? tab->num = -1 : 0;
+            tab->precision == 0 ? tab->num = -1 : 0;
             tab->precision < 0 ? tab->precision = 0 : 0;
         }
         if (format[tab->i] == '0')

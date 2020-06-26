@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 15:12:35 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/26 11:26:47 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/26 14:22:44 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void fix_width(t_tab *tab, const char *format)
             tab->i = (format[tab->i] == '0') ? tab->i + 1 : tab->i;
             tab->width = ft_atoi(&format[tab->i]);
             while (format[tab->i] >= '0' && format[tab->i] <= '9')
-                tab->i++;
+                tab->i = tab->i + 1;
         }
         tab->i = tab->i - 1;
         parse(tab, format);

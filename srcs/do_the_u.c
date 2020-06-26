@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 17:19:27 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/25 16:57:39 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/26 12:47:20 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,16 @@ static void		typecast_u(t_tab *tab)
 		tab->output_u = va_arg(tab->args, unsigned int);
 }
 
-static void		ft_putnbr_u(uintmax_t n, int *size)
-{
-	if (n < 0)
-	{
-		ft_putchar_size('-', size);
-		n = -n;
-	}
-	if (n / 10)
-	{
-		ft_putnbr_u(n / 10, size);
-	}
-	*size = *size + 1;
-	ft_putchar(n % 10 + '0');
-}
-
 static void		do_more_u(t_tab *tab)
 {
-	tab->width && tab->zero && !tab->precision ? ft_put_zeros(tab->width, &tab->len, tab->size) : 0;
-	tab->precision || tab->zero ? ft_put_zeros(tab->precision, &tab->len, tab->size) : 0;
+	if (tab->width && tab->zero && !tab->precision)
+		ft_put_zeros(tab->width, &tab->len, tab->size);
+	if (tab->precision || tab->zero)
+		ft_put_zeros(tab->precision, &tab->len, tab->size);
 	if (tab->minus)
 	{
-		!(tab->num && tab->output_u == 0) ? ft_putnbr_size(tab->output_u, tab->size) : 0;
+		if (!(tab->num && tab->output_u == 0))
+			ft_putnbr_size(tab->output_u, tab->size);
 		ft_put_spaces(tab->width, tab->len, tab->size);
 		return ;
 	}
@@ -64,13 +52,20 @@ static void		do_more_u(t_tab *tab)
 void			do_the_u(t_tab *tab)
 {
 	typecast_u(tab);
-	tab->len = ft_numlen(tab->output_u);
-	(tab->num == -1 || tab->num == -2) && tab->output_u == 0 ? tab->len = 0 : 0;
-	tab->width && !tab->zero && !tab->minus && !tab->precision ? ft_put_spaces(tab->width, tab->len, tab->size) : 0;
+	tab->len = ft_numlen_u(tab->output_u);
+	if ((tab->num == -1 || tab->num == -2) && tab->output_u == 0)
+		tab->len = 0;
+	if (tab->width && !tab->zero && !tab->minus && !tab->precision)
+		ft_put_spaces(tab->width, tab->len, tab->size);
 	if (tab->width && tab->precision && !tab->minus)
 	{
 		if (tab->width > tab->precision && tab->precision > tab->len)
-			(tab->plus || tab->space) ? ft_put_spaces(tab->width, tab->precision + 1, tab->size) : ft_put_spaces(tab->width, tab->precision, tab->size);
+		{
+			if (tab->plus || tab->space)
+				ft_put_spaces(tab->width, tab->precision + 1, tab->size);
+			else
+				ft_put_spaces(tab->width, tab->precision, tab->size);
+		}
 		else if (tab->width > tab->precision && tab->width > tab->len)
 			ft_put_spaces(tab->width, tab->len, tab->size);
 	}

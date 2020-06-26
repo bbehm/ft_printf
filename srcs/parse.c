@@ -6,13 +6,12 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 11:55:38 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/25 17:33:54 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/26 14:20:43 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include "../libft/includes/libft.h"
-#include <unistd.h>
 
 static void	flags(t_tab *tab, const char *format)
 {
@@ -88,6 +87,7 @@ void	parse(t_tab *tab, const char *format)
 	flag == 'o' ? do_the_o(tab, flag) : 0;
 	flag == 'c' ? do_the_c(tab) : 0;
 	flag == 'p' ? do_the_p(tab, flag) : 0;
+	flag == 's' ? do_the_s(tab) : 0;
 	flag == 'f' ? do_the_f(tab) : 0;
 	flag == '%' ? percent_flag(tab) : 0;
 	parse_two(tab, format);

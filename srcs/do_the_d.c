@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:00:51 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/25 17:43:46 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/26 11:49:07 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static void 	do_final(t_tab *tab)
 			ft_putchar_size('-', tab->size);
 			tab->output *= -1;
 		}
-		!(tab->num && tab->output == 0) ? ft_putnbr_size(tab->output, tab->size) : 0;
+		if (!(tab->num && tab->output == 0))
+			ft_putnbr_size(tab->output, tab->size);
 		(tab->output >= 0 && (tab->plus || tab->space) && !(tab->precision < tab->len) && !tab->sign) ? tab->len += 1 : 0;
 		tab->sign == 1 && !(tab->precision < tab->len) ? tab->len += 1 : 0;
 		ft_put_spaces(tab->width, tab->len, tab->size);
@@ -49,7 +50,8 @@ static void 	do_final(t_tab *tab)
 
 static void		do_further(t_tab *tab)
 {
-	tab->space && !tab->minus && tab->width && !tab->zero && !tab->precision ? ft_put_spaces(tab->width, tab->len, tab->size) : 0;
+	if (tab->space && !tab->minus && tab->width && !tab->zero && !tab->precision)
+		ft_put_spaces(tab->width, tab->len, tab->size);
 	if (tab->output >= 0 && (tab->plus || tab->space))
 		tab->plus ? ft_put_plus(tab->size) : ft_put_space(tab->size);
 	if (tab->precision || tab->zero)
@@ -60,8 +62,10 @@ static void		do_further(t_tab *tab)
 			tab->output *= -1;
 			tab->sign = 1;
 		}
-		tab->precision ? ft_put_zeros(tab->precision, &tab->len, tab->size) : 0;
-		tab->zero && !tab->precision && !tab->minus ? ft_put_zeros(tab->width, &tab->len, tab->size) : 0;
+		if (tab->precision)
+			ft_put_zeros(tab->precision, &tab->len, tab->size);
+		if (tab->zero && !tab->precision && !tab->minus)
+			ft_put_zeros(tab->width, &tab->len, tab->size);
 	}
 	do_final(tab);
 }

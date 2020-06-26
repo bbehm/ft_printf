@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 17:20:07 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/25 15:49:18 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/26 12:34:26 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	do_the_p(t_tab *tab, char flag)
 	if (tab->minus)
 	{
 		ft_putstr_size("0x", tab->size);
-		if (!tab->num && tab->output_u != 0)
+		if (!(tab->num && tab->output_u == 0))
 			ft_itoa_base_size(tab->output_u, 16, tab->size, flag);
 		ft_put_spaces(tab->width, ft_strlen(tab->nbr) + 2, tab->size);
 		free(tab->nbr);
@@ -30,7 +30,7 @@ void	do_the_p(t_tab *tab, char flag)
 	}
 	free(tab->nbr);
 	ft_putstr_size("0x", tab->size);
-	if (tab->output_u != 0 && !tab->num)
-		ft_itoa_base_size(tab->output_u, 16, tab->size, flag);
-	return ;
+	if (tab->output_u == 0 && tab->num)
+		return ;
+	ft_itoa_base_size(tab->output_u, 16, tab->size, flag);
 }
