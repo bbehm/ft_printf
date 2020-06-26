@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 15:12:35 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/25 14:25:30 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/26 11:26:47 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void fix_width(t_tab *tab, const char *format)
                 tab->minus = 1;
                 tab->width *= -1;
             }
-            tab->i = (format[tab->i + 1]) == '*' ? tab->i + 1 : tab->i + 1;
+            tab->i = (format[tab->i + 1]) == '*' ? tab->i + 2 : tab->i + 1;
         }
         else
         {
