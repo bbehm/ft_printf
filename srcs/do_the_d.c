@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:00:51 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/26 11:49:07 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/26 15:14:04 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,11 @@ static void		do_more(t_tab *tab)
 void			do_the_d(t_tab *tab)
 {
 	typecast_int(tab);
-	tab->len = ft_numlen(tab->output);
-	tab->len = (tab->output >= 0 && (tab->plus || tab->space) && tab->precision < tab->width && tab->precision <= tab->len) ? tab->len + 1 : tab->len;
-	tab->len = (tab->precision >= tab->len && tab->output < 0) ? tab->len - 1 : tab->len;
+	tab->len = ft_intlen(tab->output);
+	if (tab->output >= 0 && (tab->plus || tab->space) && tab->precision < tab->width && tab->precision <= tab->len)
+		tab->len = tab->len + 1;
+	if (tab->precision >= tab->len && tab->output < 0)
+		tab->len = tab->len - 1;
 	tab->num && tab->output == 0 ? tab->len = 0 : 0;
 	tab->num && tab->output == 0 && (tab->plus || tab->space) ? tab->len = 1 : 0;
 	do_more(tab);

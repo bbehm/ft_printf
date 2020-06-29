@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 17:19:27 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/26 12:47:20 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/26 15:17:04 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void		do_more_u(t_tab *tab)
 void			do_the_u(t_tab *tab)
 {
 	typecast_u(tab);
-	tab->len = ft_numlen_u(tab->output_u);
+	tab->len = ft_intlen_u(tab->output_u);
 	if ((tab->num == -1 || tab->num == -2) && tab->output_u == 0)
 		tab->len = 0;
 	if (tab->width && !tab->zero && !tab->minus && !tab->precision)
