@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   do_the_d.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:00:51 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/26 15:14:04 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/29 13:47:13 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include "../libft/includes/libft.h"
+#include <stdio.h>
 
-static void		typecast_int(t_tab *tab)
+static void		typecast_d(t_tab *tab)
 {
 	if (tab->length == 'a')
 		tab->output = (long)va_arg(tab->args, void*);
@@ -38,8 +39,10 @@ static void 	do_final(t_tab *tab)
 		}
 		if (!(tab->num && tab->output == 0))
 			ft_putnbr_size(tab->output, tab->size);
-		(tab->output >= 0 && (tab->plus || tab->space) && !(tab->precision < tab->len) && !tab->sign) ? tab->len += 1 : 0;
-		tab->sign == 1 && !(tab->precision < tab->len) ? tab->len += 1 : 0;
+		if (tab->output >= 0 && (tab->plus || tab->space) && !(tab->precision < tab->len) && !tab->sign)
+			tab->len += 1;
+		if (tab->sign == 1 && !(tab->precision < tab->len))
+			tab->len += 1;
 		ft_put_spaces(tab->width, tab->len, tab->size);
 		return ;
 	}
@@ -72,15 +75,21 @@ static void		do_further(t_tab *tab)
 
 static void		do_more(t_tab *tab)
 {
-	tab->width && !tab->zero && !tab->space && !tab->minus && !tab->precision ? ft_put_spaces(tab->width, tab->len, tab->size) : 0;
+	if (tab->width && !tab->zero && !tab->space && !tab->minus && !tab->precision)
+		ft_put_spaces(tab->width, tab->len, tab->size);
 	if (tab->width && tab->precision && !tab->minus)
 	{
-		if (tab->width > tab->precision && tab->precision > tab->len)
-			(tab->plus || tab->space || tab->output < 0) ? ft_put_spaces(tab->width, tab->precision + 1, tab->size) : ft_put_spaces(tab->width, tab->precision, tab->size);
+		if (tab->precision < tab->width && tab->precision > tab->len)
+		{	
+			if (tab->plus || tab->space || tab->output < 0)
+				ft_put_spaces(tab->width, tab->precision + 1, tab->size);
+			else
+				ft_put_spaces(tab->width, tab->precision, tab->size);
+		}
 		else if (tab->width > tab->precision && tab->width > tab->len)
 			ft_put_spaces(tab->width, tab->len, tab->size);
-		do_further(tab);
 	}
+	do_further(tab);
 }
 
 /*
@@ -90,7 +99,7 @@ static void		do_more(t_tab *tab)
 
 void			do_the_d(t_tab *tab)
 {
-	typecast_int(tab);
+	typecast_d(tab);
 	tab->len = ft_intlen(tab->output);
 	if (tab->output >= 0 && (tab->plus || tab->space) && tab->precision < tab->width && tab->precision <= tab->len)
 		tab->len = tab->len + 1;
