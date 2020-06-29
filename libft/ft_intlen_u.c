@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_size.c                                   :+:      :+:    :+:   */
+/*   ft_intlen_u.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/18 10:50:15 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/26 15:27:11 by bbehm            ###   ########.fr       */
+/*   Created: 2020/06/26 12:38:53 by bbehm             #+#    #+#             */
+/*   Updated: 2020/06/26 15:33:17 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-void	ft_putnbr_size(long long n, int *size)
+int	ft_intlen_u(unsigned long long value)
 {
-	if (n == -2147483648)
+	int		tens;
+
+	tens = 1;
+	while (value / 10)
 	{
-		ft_putchar_size('-', size);
-		ft_putnbr_size(2, size);
-		ft_putnbr_size(147483648, size);
+		value = value / 10;
+		tens++;
 	}
-	else if (n >= 0 && n < 10)
-		ft_putchar_size(n + '0', size);
-	else if (n >= 10)
-	{
-		ft_putnbr_size(n / 10, size);
-		ft_putchar_size(n % 10 + '0', size);
-	}
-	else if (n < 0)
-	{
-		ft_putchar_size('-', size);
-		ft_putnbr_size(-n, size);
-	}
+	return (tens);
 }

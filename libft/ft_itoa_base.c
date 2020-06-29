@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 10:25:41 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/24 10:44:32 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/26 14:57:01 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,38 +28,43 @@
 ** return the result string (ptr).
 */
 
-char		*ft_itoa_base(int value, int base)
+static unsigned int	num_len(unsigned long long value, int base)
 {
-    int     num_len;
-    int     num;
-    char    *ptr;
-    char    *base_str = "0123456789ABCDEF";
+	int	size;
 
-    if (value == 0)
-        return ("0");
-    num_len = 0;
-    num = value;
-    while (num)
-    {
-        num = num / base;
-        num_len++;
-    }
-    num = value;
-    if (num < 0)
-    {
-        if (base == 10)
-            num_len++;
-        num = num * -1;
-    }
-    if (!(ptr = (char*)malloc(sizeof(char) * num_len + 1)))
-        return (NULL);
-    ptr[num_len] = '\0';
-    while (num)
-    {
-        ptr[--num_len] = base_str[num % base];
-        num = num / base;
-    }
-    if (value < 0 && base == 10)
-        ptr[0] = '-';
-    return (ptr);
+	size = 1;
+	if (value < 0 && base == 10)
+		size++;
+	while (value / base)
+	{
+		size++;
+		value /= base;
+	}
+	return (size);
+}
+
+char				*ft_itoa_base(unsigned long long value, int base)
+{
+	int					size;
+	unsigned long long	nbr;
+	char				*res;
+	char				*str_base;
+
+	nbr = value;
+	str_base = "0123456789ABCDEF";
+	if (base < 2 || base > 16)
+		return (NULL);
+	size = num_len(nbr, base);
+	if (!(res = (char*)malloc(sizeof(*res) * (size + 1))))
+		return (NULL);
+	res[size--] = '\0';
+	res[0] = (nbr < 0 && base == 10 ? '-' : '0');
+	if (nbr < 0)
+		nbr = -nbr;
+	while (nbr > 0)
+	{
+		res[size--] = str_base[nbr % base];
+		nbr /= base;
+	}
+	return (res);
 }

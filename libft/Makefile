@@ -6,7 +6,7 @@
 #    By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 15:45:47 by bbehm             #+#    #+#              #
-#    Updated: 2020/06/26 12:48:37 by bbehm            ###   ########.fr        #
+#    Updated: 2020/06/26 15:30:43 by bbehm            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,9 @@ SRC = ft_putchar.c ft_putstr.c ft_strcmp.c ft_strdup.c ft_strlen.c ft_atoi.c \
 	  ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c \
 	  ft_strleni.c ft_isupper.c ft_islower.c ft_isspace.c ft_intlen.c ft_strndup.c \
 	  ft_itoa_base.c ft_putnbrmax_fd.c ft_put_zeros.c ft_ftoa.c ft_put_spaces.c \
-	  ft_numlen.c ft_putnbr_size.c ft_putchar_size.c ft_itoa_base_size.c \
+	  ft_putnbr_size.c ft_putchar_size.c ft_itoa_base_size.c \
 	  ft_putstr_size.c ft_put_plus.c ft_put_space.c ft_itoa_base_ul.c \
-	  ft_numlen_u.c ft_putnbr_u.c
+	  ft_intlen_u.c ft_putnbr_u.c
 
 OBJ = ft_putchar.o ft_putstr.o ft_strcmp.o ft_strdup.o ft_strlen.o ft_atoi.o \
 	  ft_strcpy.o ft_strncpy.o ft_strchr.o ft_strrchr.o ft_strstr.o ft_strnstr.o \
@@ -39,9 +39,9 @@ OBJ = ft_putchar.o ft_putstr.o ft_strcmp.o ft_strdup.o ft_strlen.o ft_atoi.o \
 	  ft_lstnew.o ft_lstdelone.o ft_lstdel.o ft_lstadd.o ft_lstiter.o ft_lstmap.o \
 	  ft_strleni.o ft_isupper.o ft_islower.o ft_isspace.o ft_intlen.o ft_strndup.o \
 	  ft_itoa_base.o ft_putnbrmax_fd.o ft_put_zeros.o ft_ftoa.o ft_put_spaces.o \
-	  ft_numlen.o ft_putnbr_size.o ft_putchar_size.o ft_itoa_base_size.o \
+	  ft_putnbr_size.o ft_putchar_size.o ft_itoa_base_size.o \
 	  ft_putstr_size.o ft_put_plus.o ft_put_space.o ft_itoa_base_ul.o \
-	  ft_numlen_u.o ft_putnbr_u.o
+	  ft_intlen_u.o ft_putnbr_u.o
 	  
 	  
 HEADERS = includes/libft.h

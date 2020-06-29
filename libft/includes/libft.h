@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 15:52:15 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/26 12:48:51 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/26 15:28:38 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putendl(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
-void    			ft_putnbr_u(uintmax_t n, int *size);
+void    			ft_putnbr_u(unsigned long long n, int *size);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 char				*ft_strcat(char *s1, const char *s2);
 char				*ft_strncat(char *s1, const char *s2, size_t n);
@@ -97,13 +97,12 @@ void				ft_putnbrmax_fd(intmax_t n, int fd);
 void    			ft_put_zeros(int max, int *length, int *bytes);
 char                *ft_ftoa(long double f, int precision, int dot);
 void    			ft_put_spaces(int min, int size, int *bytes);
-int					ft_numlen(long long num);
-int					ft_numlen_u(unsigned long long value);
+int					ft_intlen_u(unsigned long long value);
 void   				ft_put_plus(int *bytes);
 void    			ft_put_space(int *bytes);
 void				ft_putchar_size(char c, int *size);
-void				ft_putnbr_size(int n, int *size);
-char				*ft_itoa_base(int value, int base);
+void				ft_putnbr_size(long long n, int *size);
+char				*ft_itoa_base(unsigned long long value, int base);
 int                 ft_itoa_base_size(unsigned long long value, int base, int *size, char flag);
 void				ft_putstr_size(char *str, int *size);
 char				*ft_itoa_base_ul(unsigned long value, int base);

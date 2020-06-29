@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_numlen.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_u.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/18 09:37:48 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/25 17:37:16 by bbehm            ###   ########.fr       */
+/*   Created: 2020/06/26 12:47:36 by bbehm             #+#    #+#             */
+/*   Updated: 2020/06/26 15:28:07 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-int		ft_numlen(long long num)
+void    ft_putnbr_u(unsigned long long n, int *size)
 {
-	int tens;
-
-	tens = 1;
-	if (num < 0)
-		tens++;
-	while (num / 10)
+	if (n < 0)
 	{
-		num = num / 10;
-		tens++;
+		ft_putchar_size('-', size);
+		n = -n;
 	}
-	return (tens);
+	if (n / 10)
+	{
+		ft_putnbr_u(n / 10, size);
+	}
+	*size = *size + 1;
+	ft_putchar(n % 10 + '0');
 }
