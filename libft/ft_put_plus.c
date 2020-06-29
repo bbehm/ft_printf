@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_put_plus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 09:46:58 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/25 16:09:29 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/29 14:48:42 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-void    ft_put_plus(int *bytes)
+void	ft_put_plus(int *bytes)
 {
 	*bytes = *bytes + 1;
 	write(1, "+", 1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 11:55:38 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/26 14:20:43 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/29 14:42:31 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static void	flags(t_tab *tab, const char *format)
 
 /*
 ** This function checks field width, precision and +-0 # flags.
+** The flags function will then add flag info to struct and move
+** on to check next flag.
 */
 
 static void	parse_three(t_tab *tab, const char *format)
@@ -74,7 +76,7 @@ static void	parse_two(t_tab *tab, const char *format)
 ** functions.
 */
 
-void	parse(t_tab *tab, const char *format)
+void		parse(t_tab *tab, const char *format)
 {
 	char flag;
 

@@ -3,16 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 11:38:10 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/25 16:12:10 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/29 14:40:41 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void initialize(t_tab *tab)
+/*
+** function to initialize struct
+*/
+
+void	initialize(t_tab *tab)
 {
 	tab->plus = 0;
 	tab->minus = 0;

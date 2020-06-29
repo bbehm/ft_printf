@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_u.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 12:47:36 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/26 15:28:07 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/29 14:46:15 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-void    ft_putnbr_u(unsigned long long n, int *size)
+void	ft_putnbr_u(unsigned long long n, int *size)
 {
 	if (n < 0)
 	{

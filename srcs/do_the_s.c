@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   do_the_s.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 16:30:43 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/26 12:37:04 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/29 14:18:01 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include "../libft/includes/libft.h"
+
+/*
+** The do_the_s function takes care of string conversions, checks for
+** additional flags and formats the output accordingly.
+*/
 
 static void	do_more_s(t_tab *tab, char *output)
 {

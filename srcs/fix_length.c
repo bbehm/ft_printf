@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   fix_length.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:38:47 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/26 11:34:56 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/29 14:29:03 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include "../libft/includes/libft.h"
+
+/*
+** fix length has its own functions for all length specifier flags. They
+** save the flag into the struct and directs to the correct conversion
+** function according to conversion flag.
+*/
 
 void	fix_h(t_tab *tab, const char *str)
 {
@@ -39,7 +45,6 @@ void	fix_h(t_tab *tab, const char *str)
 	}
 	else
 		tab->i = tab->i - 1;
-
 }
 
 void	fix_hh(t_tab *tab, const char *str)

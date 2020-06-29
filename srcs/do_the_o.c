@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   do_the_o.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 17:19:52 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/26 12:30:43 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/29 14:16:21 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include "../libft/includes/libft.h"
+
+/*
+** The do_the_o function takes care of octal conversions, checks for
+** additional flags and formats the output accordingly.
+** The typecast function casts the output to the correct type according
+** to the length specifiers.
+*/
 
 static void	typecast_u(t_tab *tab)
 {
@@ -32,7 +39,8 @@ static void	do_further_o(t_tab *tab, char flag)
 	if (tab->hash)
 	{
 		tab->output_u != 0 ? ft_putchar_size('0', tab->size) : 0;
-		if (tab->hash && tab->output_u == 0 && (tab->num == -2 || tab->num == -1))
+		if (tab->hash && tab->output_u == 0 &&\
+		(tab->num == -2 || tab->num == -1))
 			ft_putchar_size('0', tab->size);
 	}
 	if (tab->minus)

@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   do_the_p.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 17:20:07 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/26 12:34:26 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/29 14:17:10 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include "../libft/includes/libft.h"
+
+/*
+** The do_the_p function takes care of pointer conversions, checks for
+** additional flags and formats the output accordingly.
+*/
 
 void	do_the_p(t_tab *tab, char flag)
 {

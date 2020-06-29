@@ -6,13 +6,17 @@
 /*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:00:51 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/29 13:47:13 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/29 14:02:26 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include "../libft/includes/libft.h"
-#include <stdio.h>
+
+/*
+** The typecast function casts the output to the correct type according
+** to the length specifiers.
+*/
 
 static void		typecast_d(t_tab *tab)
 {
@@ -28,7 +32,7 @@ static void		typecast_d(t_tab *tab)
 		tab->output = va_arg(tab->args, int);
 }
 
-static void 	do_final(t_tab *tab)
+static void		do_final(t_tab *tab)
 {
 	if (tab->minus)
 	{
@@ -39,7 +43,8 @@ static void 	do_final(t_tab *tab)
 		}
 		if (!(tab->num && tab->output == 0))
 			ft_putnbr_size(tab->output, tab->size);
-		if (tab->output >= 0 && (tab->plus || tab->space) && !(tab->precision < tab->len) && !tab->sign)
+		if (tab->output >= 0 && (tab->plus || tab->space) &&\
+			!(tab->precision < tab->len) && !tab->sign)
 			tab->len += 1;
 		if (tab->sign == 1 && !(tab->precision < tab->len))
 			tab->len += 1;
@@ -53,7 +58,8 @@ static void 	do_final(t_tab *tab)
 
 static void		do_further(t_tab *tab)
 {
-	if (tab->space && !tab->minus && tab->width && !tab->zero && !tab->precision)
+	if (tab->space && !tab->minus && tab->width &&\
+		!tab->zero && !tab->precision)
 		ft_put_spaces(tab->width, tab->len, tab->size);
 	if (tab->output >= 0 && (tab->plus || tab->space))
 		tab->plus ? ft_put_plus(tab->size) : ft_put_space(tab->size);
@@ -75,12 +81,13 @@ static void		do_further(t_tab *tab)
 
 static void		do_more(t_tab *tab)
 {
-	if (tab->width && !tab->zero && !tab->space && !tab->minus && !tab->precision)
+	if (tab->width && !tab->zero && !tab->space && !tab->minus &&\
+		!tab->precision)
 		ft_put_spaces(tab->width, tab->len, tab->size);
 	if (tab->width && tab->precision && !tab->minus)
 	{
 		if (tab->precision < tab->width && tab->precision > tab->len)
-		{	
+		{
 			if (tab->plus || tab->space || tab->output < 0)
 				ft_put_spaces(tab->width, tab->precision + 1, tab->size);
 			else
@@ -101,11 +108,13 @@ void			do_the_d(t_tab *tab)
 {
 	typecast_d(tab);
 	tab->len = ft_intlen(tab->output);
-	if (tab->output >= 0 && (tab->plus || tab->space) && tab->precision < tab->width && tab->precision <= tab->len)
+	if (tab->output >= 0 && (tab->plus || tab->space) &&\
+		tab->precision < tab->width && tab->precision <= tab->len)
 		tab->len = tab->len + 1;
 	if (tab->precision >= tab->len && tab->output < 0)
 		tab->len = tab->len - 1;
 	tab->num && tab->output == 0 ? tab->len = 0 : 0;
-	tab->num && tab->output == 0 && (tab->plus || tab->space) ? tab->len = 1 : 0;
+	if (tab->num && tab->output == 0 && (tab->plus || tab->space))
+		tab->len = 1;
 	do_more(tab);
 }

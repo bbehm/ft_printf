@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   do_the_x.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 17:19:39 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/26 12:58:06 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/29 14:21:25 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include "../libft/includes/libft.h"
+
+/*
+** typecasting according to length specifier.
+*/
 
 static void		typecast_x(t_tab *tab)
 {
@@ -88,13 +92,19 @@ static void		do_more_x(t_tab *tab, char flag)
 	do_further_x(tab, flag);
 }
 
+/*
+** do_the_x handles hexadecimal conversions, checks for additional flags
+** and formats output accordingly.
+*/
+
 void			do_the_x(t_tab *tab, char flag)
 {
 	typecast_x(tab);
 	tab->nbr = ft_itoa_base(tab->output_u, 16);
 	tab->len = ft_strlen(tab->nbr);
 	free(tab->nbr);
-	if (tab->hash && tab->output_u != 0 && tab->width > tab->precision && tab->precision <= tab->len)
+	if (tab->hash && tab->output_u != 0 && tab->width > tab->precision &&\
+	tab->precision <= tab->len)
 		tab->len = tab->len + 2;
 	if (tab->num && tab->output_u == 0)
 		tab->len = 0;

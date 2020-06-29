@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_size.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 10:53:34 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/25 15:12:19 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/29 14:47:05 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	ft_putchar_size(char c, int *size)
 {
 	write(1, &c, 1);
-    *size = *size + 1;
+	*size = *size + 1;
 }

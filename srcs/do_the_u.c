@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   do_the_u.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 17:19:27 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/26 15:17:04 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/06/29 14:19:36 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include "../libft/includes/libft.h"
+
+/*
+** Typecasts the output according to length specifier.
+*/
 
 static void		typecast_u(t_tab *tab)
 {
@@ -46,7 +50,8 @@ static void		do_more_u(t_tab *tab)
 }
 
 /*
-** This function handles unsigned values
+** This do_the_u function handles unsigned values, checks for
+** additional flags and formats output accordingly.
 */
 
 void			do_the_u(t_tab *tab)
