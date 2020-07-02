@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 16:30:43 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/29 14:18:01 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/07/02 19:17:31 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void		do_the_s(t_tab *tab)
 		tab->len = ft_strlen(output);
 	else
 		tab->len = 0;
+	if (tab->width && tab->zero && !tab->minus && !tab->precision)
+		ft_put_zeros(tab->width, &tab->len, tab->size);
 	if (tab->precision)
 	{
 		output = ft_strsub(output, 0, tab->precision);
