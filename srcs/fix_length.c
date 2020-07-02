@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:38:47 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/29 14:29:03 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/07/02 15:40:09 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void	fix_h(t_tab *tab, const char *str)
 		tab->length = 'h';
 		do_the_x(tab, tab->flag);
 	}
-	else
-		tab->i = tab->i - 1;
 }
 
 void	fix_hh(t_tab *tab, const char *str)
@@ -71,8 +69,6 @@ void	fix_hh(t_tab *tab, const char *str)
 		tab->length = 'H';
 		do_the_x(tab, tab->flag);
 	}
-	else
-		tab->i = tab->i - 2;
 }
 
 void	fix_ll(t_tab *tab, const char *str)
@@ -99,8 +95,6 @@ void	fix_ll(t_tab *tab, const char *str)
 		tab->length = 'A';
 		do_the_x(tab, tab->flag);
 	}
-	else
-		tab->i = tab->i - 2;
 }
 
 void	fix_l(t_tab *tab, const char *str)
@@ -127,8 +121,6 @@ void	fix_l(t_tab *tab, const char *str)
 		tab->length = 'a';
 		do_the_x(tab, tab->flag);
 	}
-	else
-		tab->i = tab->i - 1;
 }
 
 void	fix_f(t_tab *tab, const char *str)
@@ -142,6 +134,4 @@ void	fix_f(t_tab *tab, const char *str)
 		tab->length = 'a';
 		do_the_f(tab);
 	}
-	else
-		tab->i = tab->i - 1;
 }
