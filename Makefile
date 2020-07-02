@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+         #
+#    By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/15 14:59:32 by bbehm             #+#    #+#              #
-#    Updated: 2020/06/25 16:23:20 by bbehm            ###   ########.fr        #
+#    Updated: 2020/07/02 17:48:52 by bbehm            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,13 +45,13 @@ OFILE =		$(CFILE:%.c=%.o)
 
 OBJ =		$(addprefix $(OBJ_DIR), $(OFILE))
 
-all: $(OBJ_DIR) $(NAME)
+all: $(NAME)
 
 $(OBJ_DIR):
 		@mkdir -p $(OBJ_DIR)
 		@echo Create: ft_printf Object directory
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ_DIR) $(OBJ)
 		@echo LIBFT START
 		@make -C $(LIB_DIR)
 		@echo Copying $(LIBFT_A) to root.
