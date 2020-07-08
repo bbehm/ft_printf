@@ -9,6 +9,9 @@ The only library functions used are:
 
 # Specs
 
+
+`%[flag][min width][precision][length modifier][conversion specifier]`
+
 My ft_printf can handle the following format specifiers:
 
 Conversion | Flags | Description
