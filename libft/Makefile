@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+         #
+#    By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 15:45:47 by bbehm             #+#    #+#              #
-#    Updated: 2020/06/26 15:30:43 by bbehm            ###   ########.fr        #
+#    Updated: 2020/07/08 11:40:24 by bbehm            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,30 +27,16 @@ SRC = ft_putchar.c ft_putstr.c ft_strcmp.c ft_strdup.c ft_strlen.c ft_atoi.c \
 	  ft_putstr_size.c ft_put_plus.c ft_put_space.c ft_itoa_base_ul.c \
 	  ft_intlen_u.c ft_putnbr_u.c
 
-OBJ = ft_putchar.o ft_putstr.o ft_strcmp.o ft_strdup.o ft_strlen.o ft_atoi.o \
-	  ft_strcpy.o ft_strncpy.o ft_strchr.o ft_strrchr.o ft_strstr.o ft_strnstr.o \
-	  ft_strncmp.o ft_isalpha.o ft_isdigit.o ft_isalnum.o ft_putnbr.o \
-	  ft_isascii.o ft_isprint.o ft_toupper.o ft_tolower.o ft_memcpy.o ft_memset.o \
-	  ft_bzero.o ft_memccpy.o ft_memmove.o ft_memchr.o ft_putendl.o ft_putchar_fd.o \
-	  ft_putstr_fd.o ft_putendl_fd.o ft_putnbr_fd.o ft_memcmp.o ft_strcat.o \
-	  ft_strncat.o ft_strlcat.o ft_itoa.o ft_memalloc.o ft_memdel.o ft_strnew.o \
-	  ft_strdel.o ft_strclr.o ft_striter.o ft_striteri.o ft_strequ.o ft_strnequ.o \
-	  ft_strsub.o ft_strjoin.o ft_strtrim.o ft_strsplit.o ft_strmap.o ft_strmapi.o \
-	  ft_lstnew.o ft_lstdelone.o ft_lstdel.o ft_lstadd.o ft_lstiter.o ft_lstmap.o \
-	  ft_strleni.o ft_isupper.o ft_islower.o ft_isspace.o ft_intlen.o ft_strndup.o \
-	  ft_itoa_base.o ft_putnbrmax_fd.o ft_put_zeros.o ft_ftoa.o ft_put_spaces.o \
-	  ft_putnbr_size.o ft_putchar_size.o ft_itoa_base_size.o \
-	  ft_putstr_size.o ft_put_plus.o ft_put_space.o ft_itoa_base_ul.o \
-	  ft_intlen_u.o ft_putnbr_u.o
+OBJ = $(SRC:%.c=%.o)
 	  
-	  
+
 HEADERS = includes/libft.h
 FLAGS = -Wall -Werror -Wextra -c
 
 $(NAME): all
 
 all:
-	gcc $(FLAGS) $(SRC) $(HEADERS)
+	gcc $(FLAGS) $(SRC)
 	ar rc $(NAME) $(OBJ)
 
 clean:
@@ -60,3 +46,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean flcean re
