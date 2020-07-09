@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 16:24:03 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/29 14:46:41 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/07/02 18:46:20 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static unsigned int	num_len(long value, int base)
 	return (size);
 }
 
-char				*ft_itoa_base_ul(unsigned long value, int base)
+char				*ft_itoa_base_ul(unsigned long long value, int base)
 {
 	int				size;
 	char			*res;

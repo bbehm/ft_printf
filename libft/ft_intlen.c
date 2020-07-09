@@ -6,13 +6,13 @@
 /*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:36:31 by bbehm             #+#    #+#             */
-/*   Updated: 2019/11/11 15:45:42 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/07/02 18:54:52 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-int	ft_intlen(int n)
+int	ft_intlen(long long n)
 {
 	int len;
 

@@ -6,7 +6,7 @@
 #    By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 15:45:47 by bbehm             #+#    #+#              #
-#    Updated: 2020/07/08 11:40:24 by bbehm            ###   ########.fr        #
+#    Updated: 2020/07/08 11:46:52 by bbehm            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,4 +47,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean flcean re
+.PHONY: all clean fclean re

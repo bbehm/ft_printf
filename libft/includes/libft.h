@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 15:52:15 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/29 15:06:01 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/07/02 18:54:44 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ char				*ft_strcat(char *s1, const char *s2);
 char				*ft_strncat(char *s1, const char *s2, size_t n);
 char				*ft_strcat(char *s1, const char *s2);
 char				*ft_strncat(char *s1, const char *s2, size_t n);
-char				*ft_itoa(int n);
+char				*ft_itoa(long long n);
 char				*ft_itoa_base(unsigned long long value, int base);
 char				*ft_strnew(size_t size);
-char				*ft_itoa_base_ul(unsigned long value, int base);
+char				*ft_itoa_base_ul(unsigned long long value, int base);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
@@ -68,7 +68,7 @@ int					ft_tolower(int c);
 int					ft_isupper(int c);
 int					ft_islower(int c);
 int					ft_isspace(int c);
-int					ft_intlen(int n);
+int					ft_intlen(long long n);
 int					ft_intlen_u(unsigned long long value);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 int					ft_strequ(char const *s1, char const *s2);

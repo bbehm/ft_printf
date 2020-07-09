@@ -6,13 +6,13 @@
 /*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 12:36:22 by bbehm             #+#    #+#             */
-/*   Updated: 2019/11/11 15:46:06 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/07/02 18:50:16 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-char			*ft_itoa(int n)
+char			*ft_itoa(long long n)
 {
 	char	*str;
 	int		i;
