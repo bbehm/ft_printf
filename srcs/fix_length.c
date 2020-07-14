@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:38:47 by bbehm             #+#    #+#             */
-/*   Updated: 2020/07/02 15:40:09 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/07/09 14:44:11 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,11 +127,14 @@ void	fix_f(t_tab *tab, const char *str)
 {
 	tab->i = tab->i + 1;
 	tab->flag = str[tab->i];
-	if (str[tab->i - 1] == 'l')
-		do_the_f(tab);
-	else if (tab->flag == 'f')
+	if (str[tab->i - 1] == 'L')
 	{
 		tab->length = 'a';
 		do_the_f(tab);
+	}
+	else
+	{
+		do_the_f(tab);
+		tab->i = tab->i - 1;
 	}
 }

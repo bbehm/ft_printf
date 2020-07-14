@@ -6,7 +6,7 @@
 /*   By: bbehm <bbehm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 11:55:38 by bbehm             #+#    #+#             */
-/*   Updated: 2020/06/29 14:42:31 by bbehm            ###   ########.fr       */
+/*   Updated: 2020/07/09 14:36:13 by bbehm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ static void	parse_two(t_tab *tab, const char *format)
 	char flag;
 
 	flag = format[tab->i];
+	flag == 'l' && format[tab->i + 1] == 'f' ? fix_f(tab, format) : 0;
+	flag == 'L' && format[tab->i + 1] == 'f' ? fix_f(tab, format) : 0;
 	flag == 'h' && format[tab->i + 1] != 'h' ? fix_h(tab, format) : 0;
 	flag == 'h' && format[tab->i + 1] == 'h' ? fix_hh(tab, format) : 0;
 	flag == 'l' && format[tab->i + 1] != 'l' ? fix_l(tab, format) : 0;
 	flag == 'l' && format[tab->i + 1] == 'l' ? fix_ll(tab, format) : 0;
-	flag == 'l' && format[tab->i + 1] == 'f' ? fix_f(tab, format) : 0;
-	flag == 'L' && format[tab->i + 1] == 'f' ? fix_f(tab, format) : 0;
 	parse_three(tab, format);
 }
 
