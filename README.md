@@ -49,3 +49,4 @@ Flag | Description
 Other features:
 - __precision__
 - __minimum field-width__
+- __wildcard (*)__
